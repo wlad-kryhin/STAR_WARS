@@ -1,5 +1,6 @@
 import { Navigation } from "./components/Navigation";
 import { Suspense, lazy } from "react";
+import { Skeleton } from "./components/Skeleton";
 import { Route, Routes } from "react-router-dom";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
@@ -9,7 +10,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Suspense fallback={"JOJOJO"}>
+      <Suspense fallback={<Skeleton />}>
         <Routes>
           <Route path="/" exact element={<Home />} />
 
