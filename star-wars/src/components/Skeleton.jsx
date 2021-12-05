@@ -7,3 +7,14 @@ export const Skeleton = () => {
     </div>
   );
 };
+export const SmallLoader = ({ height, width, text }) => (
+  <div className="loader">
+    <Loader
+      type="Puff"
+      color="#15ffc3"
+      height={height ? height : 20}
+      width={width ? width : 20}
+    />
+    {text ? text : ""}
+  </div>
+);

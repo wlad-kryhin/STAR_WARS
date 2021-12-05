@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const BASE_URL = "https://swapi.dev/api/";
 
 export const FetchPeopleStarWars = async (page) => {
