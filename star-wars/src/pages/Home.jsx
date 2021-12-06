@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { SmallLoader } from "../components/Skeleton";
 import { FetchPeopleStarWars } from "../services/apiService";
-import { Link } from "react-router-dom";
 import { GrLinkUp } from "react-icons/gr";
+import { HomeTable } from "./HomeTable";
 
 export default function Home() {
   const [people, setPeople] = useState([]);
@@ -37,37 +37,7 @@ export default function Home() {
     <main className="image">
       <section className="home">
         <h1 className="title">STAR WARS HEROS</h1>
-        <table className="table">
-          <thead>
-            <tr className="table__tr">
-              <td className="table__image up"></td>
-              <td className="table__name up">Name</td>
-              <td className="table__sum up">Films sum</td>
-            </tr>
-          </thead>
-          <tbody>
-            {people &&
-              people.map(({ name, url, films }) => {
-                const id = url.split("/").reverse()[1];
-                return (
-                  <tr key={name} className="table__tr">
-                    <td className="table__image">
-                      <img
-                        src="https://images3.alphacoders.com/114/thumb-1920-11439.png"
-                        alt=""
-                      />
-                    </td>
-                    <td className="table__name">
-                      <Link to={`/${name}/${id}`} className="table__name">
-                        {name}
-                      </Link>
-                    </td>
-                    <td className="table__sum">{films.length}</td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+        <HomeTable people={people} />
         {people.length === 0 && loading ? (
           <SmallLoader
             height={20}

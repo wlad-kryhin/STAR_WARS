@@ -55,7 +55,6 @@ export const FetchFilms = async (array) => {
 //   promiseThird,
 // ) => {
 //   const result = await Promise.all([promiseFirst, promiseSecond, promiseThird]);
-//   console.log(result);
 //   return result;
 // };
 

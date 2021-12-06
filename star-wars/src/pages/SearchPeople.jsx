@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SmallLoader } from "../components/Skeleton";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { SearchPeopleByValue } from "../services/apiService";
 export default function SearchPeople() {
   const [value, setValue] = useState("");
   const [people, setPeople] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchByValue = async (value) => {
     setLoading(true);
@@ -26,6 +29,7 @@ export default function SearchPeople() {
   const handleInputChange = (e) => {
     setValue(e.target.value);
   };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (value === "") {
@@ -34,6 +38,7 @@ export default function SearchPeople() {
     if (!value.trim()) {
       return toast.error(" 😲 Write something other!");
     }
+    navigate(`?value=${value}`);
     fetchByValue(value);
     setValue("");
     e.target.reset();

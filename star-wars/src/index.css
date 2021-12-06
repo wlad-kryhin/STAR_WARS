@@ -93,6 +93,7 @@ td {
 }
 .active {
   color: red;
+  margin-left: 5px;
 }
 .navigation__list--link {
   color: var(--dark-blue);

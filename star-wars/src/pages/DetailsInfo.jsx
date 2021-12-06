@@ -7,6 +7,8 @@ import {
 import { SmallLoader } from "../components/Skeleton";
 import { useEffect, useState } from "react";
 import { FilmList } from "../components/FilmsList";
+import { DetailsInfoTable } from "./DetailsInfoTable";
+import { Title } from "./Title";
 export default function DetailsInfo() {
   const [information, setInformation] = useState(null);
   const [films, setFilms] = useState(null);
@@ -37,54 +39,9 @@ export default function DetailsInfo() {
       {loading && <SmallLoader />}
       {information && (
         <section className="information">
-          <h2 className="title">
-            Details information about{" "}
-            <span className="active">{information.name}</span>
-          </h2>
-          <table className="table__info">
-            <thead>
-              <tr>
-                <td className="table__left">Name</td>
-                <td className="table__right">{information.name}</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="table__left">Gender</td>
-                <td className="table__right">
-                  {information.gender === "n/a"
-                    ? "Doesn't have a gender"
-                    : information.gender}
-                </td>
-              </tr>
-              <tr>
-                <td className="table__left">Hair color</td>
-                <td className="table__right">
-                  {information.hair_color === "n/a"
-                    ? "Doesn't have hair"
-                    : information.hair_color}
-                </td>
-              </tr>
-              <tr>
-                <td className="table__left">Mass</td>
-                <td className="table__right">{information.mass} kg</td>
-              </tr>
-              <tr>
-                <td className="table__left">Height</td>
-                <td className="table__right">{information.height} cm</td>
-              </tr>
-              <tr>
-                <td className="table__left">Home world</td>
-                <td className="table__right">
-                  {planet ? planet.name : "oops"}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h3 className="title">
-            Films in which <span className="active">{information.name}</span>{" "}
-            starred
-          </h3>
+          <Title text={"Details information about"} information={information} />
+          <DetailsInfoTable information={information} planet={planet} />
+          <Title text={" Films in which starred"} information={information} />
           <FilmList movies={films} />
         </section>
       )}
