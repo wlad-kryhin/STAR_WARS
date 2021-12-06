@@ -10,21 +10,22 @@ export default function Home() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function fetchPeople() {
-      setLoading(true);
-      const newPeople = await FetchPeopleStarWars(page);
-      setPeople((prevState) => [...prevState, ...newPeople]);
-      setLoading(false);
-      if (page >= 2) {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-    }
-    fetchPeople();
+    fetchPeople(page);
   }, [page]);
+
+  const fetchPeople = async (page) => {
+    setLoading(true);
+    const newPeople = await FetchPeopleStarWars(page);
+    setPeople((prevState) => [...prevState, ...newPeople]);
+    setLoading(false);
+    if (page >= 2) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const ScrollOnTop = () => {
     return window.scrollTo({
@@ -43,29 +44,31 @@ export default function Home() {
               <td className="table__name up">Name</td>
               <td className="table__sum up">Films sum</td>
             </tr>
-          </thead>{" "}
-          {people &&
-            people.map(({ name, url, films }) => {
-              const id = url.split("/").reverse()[1];
-              return (
-                <tr key={name} className="table__tr">
-                  <td className="table__image">
-                    <img
-                      src="https://images3.alphacoders.com/114/thumb-1920-11439.png"
-                      alt=""
-                    />
-                  </td>
-                  <td className="table__name">
-                    <Link to={`/${name}/${id}`} className="table__name">
-                      {name}
-                    </Link>
-                  </td>
-                  <td className="table__sum">{films.length}</td>
-                </tr>
-              );
-            })}
+          </thead>
+          <tbody>
+            {people &&
+              people.map(({ name, url, films }) => {
+                const id = url.split("/").reverse()[1];
+                return (
+                  <tr key={name} className="table__tr">
+                    <td className="table__image">
+                      <img
+                        src="https://images3.alphacoders.com/114/thumb-1920-11439.png"
+                        alt=""
+                      />
+                    </td>
+                    <td className="table__name">
+                      <Link to={`/${name}/${id}`} className="table__name">
+                        {name}
+                      </Link>
+                    </td>
+                    <td className="table__sum">{films.length}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
-        {!people && loading ? (
+        {people.length === 0 && loading ? (
           <SmallLoader
             height={20}
             width={20}
